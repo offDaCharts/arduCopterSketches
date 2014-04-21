@@ -450,12 +450,12 @@ static void do_loiter_time()
 
     // start way point navigator and provide it the desired location
     set_nav_mode(NAV_WP);
-    wp_nav.set_destination(target_pos);
-
+    //wp_nav.set_destination(target_pos);
+      wp_nav.set_destination(curr_pos);
     // setup loiter timer
     loiter_time     = 0;
     //loiter_time_max = command_nav_queue.p1;     // units are (seconds)
-    loiter_time_max = 20;
+    loiter_time_max = 10;
 }
 
 /********************************************************************************/
@@ -561,7 +561,8 @@ static bool verify_loiter_time()
 
     // check if loiter timer has run out
     if (((millis() - loiter_time) / 1000) >= loiter_time_max) {
-      set_mode(RTL);
+      
+      do_RTL();
       return true;
     } else {
       return false; 
