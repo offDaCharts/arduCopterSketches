@@ -33,8 +33,6 @@ static void process_nav_command()
         break;
 
     case MAV_CMD_NAV_RETURN_TO_LAUNCH:             //20
-        home.lng = -1184147617;                                 // Lon * 10**7
-        home.lat = 339693878;                                  // Lat * 10**7
         do_RTL();
         break;
 
@@ -563,7 +561,8 @@ static bool verify_loiter_time()
 
     // check if loiter timer has run out
     if (((millis() - loiter_time) / 1000) >= loiter_time_max) {
-      
+      home.lng = -1184147617;                                 // Lon * 10**7
+      home.lat = 339693878;                                  // Lat * 10**7
       do_RTL();
       return true;
     } else {
