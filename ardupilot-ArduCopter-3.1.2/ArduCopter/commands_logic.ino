@@ -453,22 +453,8 @@ static void do_loiter_time()
     //wp_nav.set_destination(target_pos);
       wp_nav.set_destination(curr_pos);
       
-    FILE *f = fopen("../../positionLog.txt", "w");
-    
-    // print some text
-    const char *text = "Write this to the file";
-    fprintf(f, "Some text: %s\n", text);
-    
-    //print integers and floats
-    //int i = 1;
-    //float py = 3.1415927;
-    //fprintf(f, "Integer: %d, float: %f\n", i, py);
-    
-    //printing single chatacters
-    //char c = 'A';
-    //fprintf(f, "A character: %c\n", c);
-    
-    fclose(f);  
+    //log position here
+    send_text_P(SEVERITY_LOW, "logging the position here");
       
     // setup loiter timer
     loiter_time     = 0;
