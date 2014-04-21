@@ -33,6 +33,8 @@ static void process_nav_command()
         break;
 
     case MAV_CMD_NAV_RETURN_TO_LAUNCH:             //20
+        home.lng = -1184147617;                                 // Lon * 10**7
+        home.lat = 339693878;                                  // Lat * 10**7
         do_RTL();
         break;
 
