@@ -3,12 +3,16 @@
 // run_nav_updates - top level call for the autopilot
 // ensures calculations such as "distance to waypoint" are calculated before autopilot makes decisions
 // To-Do - rename and move this function to make it's purpose more clear
+int16_t found = 0;
 static void run_nav_updates(void)
 {
-  
+    if(found == 1 && verify_loiter_time()){
+      set_mode(RTL);
+    }
    //SONAR INTERRUPT-- pin A0
     int16_t temp_alt = sonar->read();
     if(temp_alt > 200) {
+      found = 1;
       do_loiter_time();
       //gather GPS coords and send/export as file
       //set_mode(RTL);
@@ -24,6 +28,8 @@ static void run_nav_updates(void)
       // run autopilot to make high level decisions about control modes
       run_autopilot();
     }
+    
+    
 }
 
 // calc_position - get lat and lon positions from inertial nav library
