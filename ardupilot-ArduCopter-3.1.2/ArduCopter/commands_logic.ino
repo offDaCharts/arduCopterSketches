@@ -420,8 +420,8 @@ static void do_circle()
 // note: caller should set yaw_mode
 static void do_loiter_time()
 {
-    //Vector3f target_pos;
-    Vector3f target_pos = inertial_nav.get_position();
+    Vector3f target_pos;
+    //Vector3f target_pos = inertial_nav.get_position();
 
     // set roll-pitch mode (no pilot input)
     set_roll_pitch_mode(AUTO_RP);
@@ -436,12 +436,12 @@ static void do_loiter_time()
     Vector3f curr_pos = inertial_nav.get_position();
 
     // use current location if not provided
-    if(command_nav_queue.lat == 0 && command_nav_queue.lng == 0) {
+    //if(command_nav_queue.lat == 0 && command_nav_queue.lng == 0) {
         wp_nav.get_stopping_point(curr_pos,inertial_nav.get_velocity(),target_pos);
-    }else{
+    //}else{
         // default to use position provided
-        target_pos = pv_location_to_vector(command_nav_queue);
-    }
+        //target_pos = pv_location_to_vector(command_nav_queue);
+    //}
 
     // use current altitude if not provided
     if( command_nav_queue.alt == 0 ) {
@@ -560,7 +560,12 @@ static bool verify_loiter_time()
     }
 
     // check if loiter timer has run out
-    return (((millis() - loiter_time) / 1000) >= loiter_time_max);
+    if (((millis() - loiter_time) / 1000) >= loiter_time_max) {
+      set_mode(RTL);
+      return true;
+    } else {
+      return false; 
+    }
 }
 
 // verify_circle - check if we have circled the point enough

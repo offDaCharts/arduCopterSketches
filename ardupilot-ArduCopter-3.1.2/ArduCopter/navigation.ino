@@ -11,18 +11,19 @@ static void run_nav_updates(void)
     if(temp_alt > 200) {
       do_loiter_time();
       //gather GPS coords and send/export as file
-      set_mode(RTL);
+      //set_mode(RTL);
         //control_mode = LOITER;
-    }
+    } else {
     
-    // fetch position from inertial navigation
-    calc_position();
-
-    // calculate distance and bearing for reporting and autopilot decisions
-    calc_distance_and_bearing();
-
-    // run autopilot to make high level decisions about control modes
-    run_autopilot();
+      // fetch position from inertial navigation
+      calc_position();
+  
+      // calculate distance and bearing for reporting and autopilot decisions
+      calc_distance_and_bearing();
+  
+      // run autopilot to make high level decisions about control modes
+      run_autopilot();
+    }
 }
 
 // calc_position - get lat and lon positions from inertial nav library
