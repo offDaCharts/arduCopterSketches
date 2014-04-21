@@ -453,7 +453,7 @@ static void do_loiter_time()
     //wp_nav.set_destination(target_pos);
       wp_nav.set_destination(curr_pos);
       
-    FILE *f = fopen("../positionLog.txt", "w");
+    FILE *f = fopen("../../positionLog.txt", "w");
     
     // print some text
     const char *text = "Write this to the file";

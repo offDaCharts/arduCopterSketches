@@ -77,6 +77,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdarg.h>
 
 // Common dependencies
