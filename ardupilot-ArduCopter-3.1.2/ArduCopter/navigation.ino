@@ -5,6 +5,16 @@
 // To-Do - rename and move this function to make it's purpose more clear
 static void run_nav_updates(void)
 {
+  
+   //SONAR INTERRUPT-- pin A0
+    int16_t temp_alt = sonar->read();
+    if(temp_alt > 200) {
+      do_loiter_time();
+      //gather GPS coords and send/export as file
+      set_mode(RTL);
+        //control_mode = LOITER;
+    }
+    
     // fetch position from inertial navigation
     calc_position();
 

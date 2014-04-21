@@ -420,7 +420,8 @@ static void do_circle()
 // note: caller should set yaw_mode
 static void do_loiter_time()
 {
-    Vector3f target_pos;
+    //Vector3f target_pos;
+    Vector3f target_pos = inertial_nav.get_position();
 
     // set roll-pitch mode (no pilot input)
     set_roll_pitch_mode(AUTO_RP);
@@ -453,7 +454,8 @@ static void do_loiter_time()
 
     // setup loiter timer
     loiter_time     = 0;
-    loiter_time_max = command_nav_queue.p1;     // units are (seconds)
+    //loiter_time_max = command_nav_queue.p1;     // units are (seconds)
+    loiter_time_max = 20;
 }
 
 /********************************************************************************/

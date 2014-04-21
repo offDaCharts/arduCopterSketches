@@ -6,10 +6,10 @@ static void read_control_switch()
     static uint8_t switch_counter = 0;
 
     //SONAR INTERRUPT-- pin A0
-    int16_t temp_alt = sonar->read();
-    if(temp_alt > 200) {
-        control_mode = LOITER;
-    }
+    //int16_t temp_alt = sonar->read();
+    //if(temp_alt > 200) {
+        //control_mode = LOITER;
+    //}
 
 
     uint8_t switchPosition = readSwitch();
