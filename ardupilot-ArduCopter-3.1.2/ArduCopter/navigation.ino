@@ -7,6 +7,7 @@ int16_t found = 0;
 static void run_nav_updates(void)
 {
     if(found == 1 && verify_loiter_time()){
+      found = 0;
       set_mode(RTL);
     }
    //SONAR INTERRUPT-- pin A0
