@@ -17,7 +17,8 @@ static void run_nav_updates(void)
     if(temp_alt > 200) {
       found = 1;
       //gcs_data_stream_send();
-      mavlink_msg_statustext_send(MAVLINK_COMM_0, SEVERITY_HIGH, "OBJECT_FOUND");
+      //mavlink_msg_statustext_send(MAVLINK_COMM_0, SEVERITY_HIGH, "OBJECT_FOUND");
+      send_gps_raw(MAVLINK_COMM_0);
       send_location(MAVLINK_COMM_0);
       //send_gps_raw(MAVLINK_COMM_0);
       //do_loiter_time();

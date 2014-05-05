@@ -92,7 +92,9 @@ class x25crc(object):
 """def decode2(buf):
     global lastseq
     print '-----------'
-    print 'found 253 msgId'
+    print 'found 24 msgId'
+    print '----------------------OBJECT FOUND-----------------------'
+	
     xdump(buf)
     magic, mlen, seq, srcSystem, srcComponent, msgId = struct.unpack('<6B', buf[:6])
     b0,b1=struct.unpack('2B',buf[6+mlen:])
@@ -132,8 +134,8 @@ def distance_on_unit_sphere(lat1, long1, lat2, long2):
  
 def printToFile(buf):
     global lastseq
-    print '-----------'
-    print 'found 253 msgId'
+    print 'found 24 msgId'
+    print '----------------OBJECT FOUND----------------'
     xdump(buf)
     magic, mlen, seq, srcSystem, srcComponent, msgId = struct.unpack('<6B', buf[:6])
     b0,b1=struct.unpack('2B',buf[6+mlen:])
@@ -196,7 +198,7 @@ lastseq=255
         if seq != (lastseq+1)%256:
             print 'WARNING, lost message? seq=%d,lastseq=%d'%(seq,lastseq)
         lastseq=seq
-        if msgId == 253:
+        if msgId == 24:
             decode2(buf)
 	
     else:
@@ -204,7 +206,7 @@ lastseq=255
         print 'BAD CRC on message'"""
 
 #-----------------------------------------------------------------------
-def has253msgId(buf):
+def has24msgId(buf):
     """decode a mavlink message"""
 
     global lastseq
@@ -226,7 +228,7 @@ def has253msgId(buf):
         if seq != (lastseq+1)%256:
             print 'WARNING, lost message? seq=%d,lastseq=%d'%(seq,lastseq)
         lastseq=seq
-        return msgId == 253
+        return msgId == 24
 	
     else:
         # complain!
@@ -262,7 +264,7 @@ def process(ser):
             if Found:
                 printToFile(buf)
                 Found = False
-            if has253msgId(buf):
+            if has24msgId(buf):
                 Found = True
                 
 

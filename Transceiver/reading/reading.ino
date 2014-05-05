@@ -2,9 +2,9 @@
 
 //Initials
 long   startLongWhole = -118;
-long startLongDecimal = 4145688;
+long startLongDecimal = 4145790;
 float startLatWhole = 33.0;
-long startLatDecimal = 9695502;
+long startLatDecimal = 9695650;
 long   longCycles = 0;
 long   latCycles = 0;
 float inchesPerCycle = 56.0;
@@ -64,9 +64,13 @@ void loop(){
      Serial.println(longInch);
      float latInch = latDiff /(scalingDifference);
      Serial.println(latInch);
-     longCycles = floor(longInch/inchesPerCycle);
+        
+     longCycles = round(longInch/inchesPerCycle);
+     
+     //.75 adjustment
+     //longCycles = floor(0.75 * longInch/inchesPerCycle);
      Serial.println(longCycles);
-     latCycles = floor(latInch/inchesPerCycle);
+     latCycles = round(latInch/inchesPerCycle);
      Serial.println(latCycles);
      if (latCycles == 7){
        latCycles++;
@@ -78,9 +82,13 @@ void loop(){
      //longCycles = 24;
      //latCycles = 14;
      
+     //buf[0] = longCycles;
+     //buf[1] = latCycles;
      
-     buf[0] = longCycles;
-     buf[1] = latCycles;
+     buf[0] = latCycles;
+     buf[1] = longCycles;
+     
+     
      //vw_send((uint8_t *)msg, strlen(msg));
      vw_send(buf , 2);
      delay(400);
