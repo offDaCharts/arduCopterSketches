@@ -1,6 +1,3 @@
-// Dagu 5 Chassis example.
-// Author: Nick Gammon
-// Date:   11th December 2011
 #include <VirtualWire.h>
 volatile int rotaryCount = 0;
 
