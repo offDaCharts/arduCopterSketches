@@ -20,7 +20,7 @@ volatile int rotaryCount = 0;
 
 #define TIME_FORWARDS 3000
 #define TIME_BACKWARDS 1000
-#define TIME_TURN 700
+#define TIME_TURN 650
 #define TIME_TURN2 1400
 #define TIME_TURN3 2100
 boolean messageReceived = false;
@@ -82,14 +82,24 @@ void loop ()
  }
  if(cyclesStarted && !finished){
    if(latBoolean){
-      if(i > 12){
-        analogWrite (MOTORA, 185);//220
-        analogWrite (MOTORB, 220);
+      if(i >= 15){
+        analogWrite (MOTORA, 230);//220
+        analogWrite (MOTORB, 200);
+        start = millis ();
+      }
+      else if (i >= 12){
+        analogWrite (MOTORA, 225);//220
+        analogWrite (MOTORB, 200);
+        start = millis ();
+      }
+      else if (i >= 8){
+        analogWrite (MOTORA, 215);//220
+        analogWrite (MOTORB, 185);
         start = millis ();
       }
       else{
-        analogWrite (MOTORA, 185);//220
-        analogWrite (MOTORB, 185);
+        analogWrite (MOTORA, 195);//220
+        analogWrite (MOTORB, 175);
         start = millis ();
       }
    }
@@ -155,26 +165,26 @@ void loop ()
   /*CYCLE 7*/
     else{
     if(j >= 9){
-      analogWrite (MOTORA, 215);
-      analogWrite (MOTORB, 190);
+      analogWrite (MOTORA, 210);
+      analogWrite (MOTORB, 195);
       Serial.println("hey");
       start = millis ();
     }
      else if (j >= 4){
-      analogWrite (MOTORA, 200);
+      analogWrite (MOTORA, 210);
       analogWrite (MOTORB, 195);
       Serial.println("you");
       start = millis ();
     }
     else if (j >= 2){
       analogWrite (MOTORA, 200);
-      analogWrite (MOTORB, 185);
+      analogWrite (MOTORB, 195);
       Serial.println("you");
       start = millis ();
     }
     else{
-      analogWrite (MOTORA, 210);
-      analogWrite (MOTORB, 185);
+      analogWrite (MOTORA, 200);
+      analogWrite (MOTORB, 190);
       start = millis ();
     }
  }
@@ -211,38 +221,40 @@ void loop ()
       j++;
     } 
      else if(j == cyclesLong){
-      digitalWrite (DIRECTIONA, 0); 
-      digitalWrite (DIRECTIONB, 1);
-      digitalWrite (DIRECTIONC, 1); 
-      digitalWrite (DIRECTIOND, 0);
-      time_to_go = TIME_TURN2;
+     
+//      digitalWrite (DIRECTIONA, 0); 
+//      digitalWrite (DIRECTIONB, 1);
+//      digitalWrite (DIRECTIONC, 1); 
+//      digitalWrite (DIRECTIOND, 0);
+//      time_to_go = TIME_TURN2;
       j++;
+      finished = true;
      }
-     else  if ( l < cyclesLong ) {
-      digitalWrite (DIRECTIONA, 1); 
-      digitalWrite (DIRECTIONB, 1);
-      digitalWrite (DIRECTIONC, 1); 
-      digitalWrite (DIRECTIOND, 1); 
-      time_to_go = TIME_FORWARDS;
-      l++;
-    } 
-    else if ( l == cyclesLat ) {     
-      digitalWrite (DIRECTIONA, 0); 
-      digitalWrite (DIRECTIONB, 1);
-      digitalWrite (DIRECTIONC, 1); 
-      digitalWrite (DIRECTIOND, 0);
-      time_to_go = TIME_TURN3;
-      latBoolean = true;
-      l++;
-     }
-    else if ( k < cyclesLat )   {
-      digitalWrite (DIRECTIONA, 1); 
-      digitalWrite (DIRECTIONB, 1); 
-      digitalWrite (DIRECTIONC, 1); 
-      digitalWrite (DIRECTIOND, 1); 
-      time_to_go = TIME_FORWARDS;
-      k++;
-    }
+//     else  if ( l < cyclesLong ) {
+//      digitalWrite (DIRECTIONA, 1); 
+//      digitalWrite (DIRECTIONB, 1);
+//      digitalWrite (DIRECTIONC, 1); 
+//      digitalWrite (DIRECTIOND, 1); 
+//      time_to_go = TIME_FORWARDS;
+//      l++;
+//    } 
+//    else if ( l == cyclesLat ) {     
+//      digitalWrite (DIRECTIONA, 0); 
+//      digitalWrite (DIRECTIONB, 1);
+//      digitalWrite (DIRECTIONC, 1); 
+//      digitalWrite (DIRECTIOND, 0);
+//      time_to_go = TIME_TURN3;
+//      latBoolean = true;
+//      l++;
+//     }
+//    else if ( k < cyclesLat )   {
+//      digitalWrite (DIRECTIONA, 1); 
+//      digitalWrite (DIRECTIONB, 1); 
+//      digitalWrite (DIRECTIONC, 1); 
+//      digitalWrite (DIRECTIOND, 1); 
+//      time_to_go = TIME_FORWARDS;
+//      k++;
+//    }
     else if ( i == cyclesLat + 1, k == cyclesLat + 1, j == cyclesLong + 1, l == cyclesLong + 1) {
       analogWrite (MOTORA, 0);
       analogWrite (MOTORB, 0);

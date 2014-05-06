@@ -21,7 +21,7 @@ static void run_nav_updates(void)
       send_gps_raw(MAVLINK_COMM_0);
       send_location(MAVLINK_COMM_0);
       //send_gps_raw(MAVLINK_COMM_0);
-      //do_loiter_time();
+      do_loiter_time();
       //gather GPS coords and send/export as file
       //set_mode(RTL);
         //control_mode = LOITER;
