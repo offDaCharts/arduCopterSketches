@@ -162,16 +162,12 @@ def printToFile(buf):
 
     radiusOfEarthInches = 251106299
     inchesToTravel= radiusOfEarthInches * distance_on_unit_sphere(startLat, startLon, lat, lon)
+    #inchesToTravel is the "as the crow flies" distance from the rover to the star(not used)
 
 
     startCoords = "Start: X " + str(startLat) + " Y " + str(startLon) + "\n"
-    #coords = "X " + "%0.7f" % lat + " Y " + "%0.7f" % lon + "\n"
     coords = str(int((lat - 33) * 10**7)) + " " + str(int((lon + 118) * -10**7))
-    #coords = "X " + str(lat) + " Y " + str(lon) + "\n"
-    #hexa = ' '.join(["%02X"%ord(x) for x in buf[10:18]])
-    #f.write(startCoords)
     f.write(coords)
-    #f.write(str(inchesToTravel))
     f.close()
     #f.write(buf[10:18]) (binary signed)
 #-----------------------------------------------------------------------
